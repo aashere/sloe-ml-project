@@ -3,8 +3,8 @@ import matplotlib.lines as mlines
 import numpy as np
 np.random.seed(1)
 
-def plot_p_vals(p_vals_baseline, p_vals_sloe, title, filename, n, ratio, latent_ratio):
-    fig, ax = plt.subplots(1, 2, figsize=(10,5))
+def plot_p_vals(p_vals_baseline, p_vals_sloe, title, filename, n, ratio):
+    fig, ax = plt.subplots(1, 2, sharey='row', figsize=(10,5))
     
     ax[0].hist(p_vals_baseline, bins=20, density=True)
     ax[0].axhline(y=1.0, color='black', linestyle='--')
@@ -18,20 +18,13 @@ def plot_p_vals(p_vals_baseline, p_vals_sloe, title, filename, n, ratio, latent_
     ax[1].set_ylabel('Frequency')
     ax[1].set_title('Corrected')
     
-    if latent_ratio:
-        fig.suptitle('{} p-values (n={}, ratio={}, latent ratio={})'.format(title, n, ratio, latent_ratio))
-    else:
-        fig.suptitle('{} p-values (n={}, ratio={})'.format(title, n, ratio))
+    fig.suptitle('{} p-values (n={}, ratio={})'.format(title, n, ratio))
     plt.tight_layout()
-    if latent_ratio:
-        plt.savefig('results/plots/{}/{}_{}_{}_{}_p_vals.pdf'.format(filename, filename, n, ratio, latent_ratio))
-        plt.savefig('results/plots/{}/{}_{}_{}_{}_p_vals.jpg'.format(filename, filename, n, ratio, latent_ratio))
-    else:
-        plt.savefig('results/plots/{}/{}_{}_{}_p_vals.pdf'.format(filename, filename, n, ratio))
-        plt.savefig('results/plots/{}/{}_{}_{}_p_vals.jpg'.format(filename, filename, n, ratio))
+    plt.savefig('results/plots/{}/{}_{}_{}_p_vals.pdf'.format(filename, filename, n, ratio))
+    plt.savefig('results/plots/{}/{}_{}_{}_p_vals.jpg'.format(filename, filename, n, ratio))
     plt.clf()
 
-def plot_conf_ints(pred_ints_baseline, pred_ints_sloe, X_test, y_test, title, filename, n, ratio, latent_ratio, ci=90):
+def plot_conf_ints(pred_ints_baseline, pred_ints_sloe, X_test, y_test, title, filename, n, ratio, ci=90):
     fig, ax = plt.subplots(1, 2, figsize=(12,5))
     #Sample from test set for CI
     num_samples = 8
@@ -80,20 +73,13 @@ def plot_conf_ints(pred_ints_baseline, pred_ints_sloe, X_test, y_test, title, fi
     ax[1].set_xlabel('Probability (logit scale)')
     ax[1].set_xscale("logit")
     
-    if latent_ratio:
-        fig.suptitle('{} Confidence Intervals (n={}, ratio={}, latent ratio={})'.format(title, n, ratio, latent_ratio))
-    else:
-        fig.suptitle('{} Confidence Intervals (n={}, ratio={})'.format(title, n, ratio))
+    fig.suptitle('{} Confidence Intervals (n={}, ratio={})'.format(title, n, ratio))
     observed_patch = mlines.Line2D([],[],color='black', marker='*', linestyle='None', label='Observed Outcome')
     standard_patch = mlines.Line2D([],[],color='blue', marker='|',label='Standard {}% CI'.format(ci))
     corrected_patch = mlines.Line2D([],[],color='orange', marker='|',label='Corrected {}% CI'.format(ci))
     ax[1].legend(handles=[observed_patch, standard_patch, corrected_patch])
     plt.tight_layout()
 
-    if latent_ratio:
-        plt.savefig('results/plots/{}/{}_{}_{}_{}_CIs.pdf'.format(filename, filename, n, ratio, latent_ratio))
-        plt.savefig('results/plots/{}/{}_{}_{}_{}_CIs.jpg'.format(filename, filename, n, ratio, latent_ratio))
-    else:
-        plt.savefig('results/plots/{}/{}_{}_{}_CIs.pdf'.format(filename, filename, n, ratio))
-        plt.savefig('results/plots/{}/{}_{}_{}_CIs.jpg'.format(filename, filename, n, ratio))
+    plt.savefig('results/plots/{}/{}_{}_{}_CIs.pdf'.format(filename, filename, n, ratio))
+    plt.savefig('results/plots/{}/{}_{}_{}_CIs.jpg'.format(filename, filename, n, ratio))
     plt.clf()

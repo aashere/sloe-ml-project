@@ -10,7 +10,7 @@ torch.manual_seed(1)
 
 # TEST NORMALIZING FLOW
 print('NORMALIZING FLOW TEST')
-test_normalizing_flow(0.2, 3000, 1000, np.sqrt(5))
+test_normalizing_flow(3000, 600)
 
 # SIMULATED DATA TESTS
 print('SIMULATED DATA TESTS')
@@ -18,8 +18,6 @@ ratios = [0.1, 0.2]
 n_vals = [500, 1000, 3000]
 gamma = np.sqrt(5)
 ci = 90
-
-latent_ratios = [0.1, 0.5, 0.9]
 
 # To store F1 scores
 scores = []
@@ -43,18 +41,17 @@ for ratio in ratios:
         test_res = run_test(ratio, n, p, ci, 'Simulated Non-Gaussian', 'non_gaussian', gamma=gamma, is_max=is_max)
         scores.append(test_res)
 
-        for latent_ratio in latent_ratios:
-            # TEST 3: Latent Gaussian Variables
-            print('TEST 3: Latent Gaussian Variables, Latent Ratio: {}'.format(latent_ratio))
+        # TEST 3: Latent Gaussian Variables
+        print('TEST 3: Latent Gaussian Variables')
 
-            test_res = run_test(ratio, n, p, ci, 'Simulated Latent Gaussian', 'latent_gaussian', gamma=gamma, is_max=is_max, latent_ratio=latent_ratio)
-            scores.append(test_res)
+        test_res = run_test(ratio, n, p, ci, 'Simulated Latent Gaussian', 'latent_gaussian', gamma=gamma, is_max=is_max)
+        scores.append(test_res)
 
-            # TEST 4: Latent Non-Gaussian Variables
-            print('TEST 4: Latent Non-Gaussian Variables, Latent Ratio: {}'.format(latent_ratio))
+        # TEST 4: Latent Non-Gaussian Variables
+        print('TEST 4: Latent Non-Gaussian Variables')
 
-            test_res = run_test(ratio, n, p, ci, 'Simulated Latent Non-Gaussian', 'latent_non_gaussian', gamma=gamma, is_max=is_max, latent_ratio=latent_ratio)
-            scores.append(test_res)
+        test_res = run_test(ratio, n, p, ci, 'Simulated Latent Non-Gaussian', 'latent_non_gaussian', gamma=gamma, is_max=is_max)
+        scores.append(test_res)
 
         # TEST 5: Heavy tailed distribution
         print('TEST 5: Heavy Tailed Distribution')
@@ -64,7 +61,7 @@ for ratio in ratios:
 
 # HEART DISEASE DATA
 print('HEART DISEASE DATA TESTS')
-sampling_ratio = 0.22
+sampling_ratio = 0.28
 
 X, y = retrieve_heart_data(sampling_ratio)
 
