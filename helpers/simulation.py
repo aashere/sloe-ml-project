@@ -198,9 +198,10 @@ def run_test(ratio, n, p, ci, title, type, gamma=np.sqrt(5), X=None, y=None, is_
     p_vals_sloe, alpha, pred_ints_sloe, score_sloe, performance_sloe = test_sloe(X_train.numpy(), y_train.numpy(), X_test.numpy(), y_test.numpy(), ci=ci)
 
     # Generate plots
-    if is_max and (p_vals_baseline is not None) and (pred_ints_baseline is not None) and (p_vals_sloe is not None) and (pred_ints_sloe is not None):
-        if type != 'heart':
-            plot_p_vals(p_vals_baseline, p_vals_sloe, title, type, n, ratio)
+    if type == 'heart':
+        plot_conf_ints(pred_ints_baseline, pred_ints_sloe, X_test.numpy(), y_test.numpy(), title, type, n, ratio, ci=ci)
+    elif is_max and (p_vals_baseline is not None) and (pred_ints_baseline is not None) and (p_vals_sloe is not None) and (pred_ints_sloe is not None):
+        plot_p_vals(p_vals_baseline, p_vals_sloe, title, type, n, ratio)
         plot_conf_ints(pred_ints_baseline, pred_ints_sloe, X_test.numpy(), y_test.numpy(), title, type, n, ratio, ci=ci)
 
     # Output score dict
