@@ -1,6 +1,6 @@
 n,kappa,type,baseline F1 score,SLOE F1 score
-1000,0.1,non_gaussian,0.58,0.57
-3000,0.1,latent_gaussian,0.57,0.57
-3000,0.1,latent_non_gaussian,0.54,0.54
-3000,0.2,latent_gaussian,0.48,0.48
-3000,0.2,latent_non_gaussian,0.52,0.5
+1000,0.1,non_gaussian,0.578,0.5714
+3000,0.1,latent_gaussian,0.5697,0.5727
+3000,0.1,latent_non_gaussian,0.5413,0.5405
+3000,0.2,latent_gaussian,0.4832,0.4824
+3000,0.2,latent_non_gaussian,0.5163,0.4984

@@ -1,5 +1,5 @@
 n,kappa,type,baseline time (s),SLOE time (s)
-3000,0.2,non_gaussian,4.42,4.13
-3000,0.2,latent_gaussian,4.79,4.0
-3000,0.2,latent_non_gaussian,3.64,3.44
-3000,0.2,heavy,4.62,4.0
+3000,0.2,non_gaussian,4.4205,4.1317
+3000,0.2,latent_gaussian,4.794,3.9953
+3000,0.2,latent_non_gaussian,3.645,3.436
+3000,0.2,heavy,4.621,3.9952
