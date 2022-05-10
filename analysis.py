@@ -3,6 +3,7 @@ import pandas as pd
 df = pd.read_csv('results/scores/scores.csv', encoding='utf8')
 df = df[df['type'] != 'heart']
 df = df.rename(columns={'ratio': 'kappa'})
+df.loc[:,['alpha','baseline F1 score','SLOE F1 score','baseline time (s)','SLOE time (s)']] = df[['alpha','baseline F1 score','SLOE F1 score','baseline time (s)','SLOE time (s)']].round(2)
 
 print('Different F1 scores:')
 f1_df = df[['n','kappa','type','baseline F1 score','SLOE F1 score']][df['baseline F1 score'] != df['SLOE F1 score']]
