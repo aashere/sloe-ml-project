@@ -14,8 +14,10 @@ This codebase is structured as follows:
     - `simulation.py` contains functions to generate the different kinds of data and run one simulation iteration
 - `results` folder contains the results of the experiments
     - `plots` folder contains the p-value and prediction interval plots for the different kinds of data
-    - `scores` folder contains a CSV file with alpha (logit inflation) values, F1 scores, and execution times for every combination of simulation parameters
+    - `scores` folder contains a combined CSV file with alpha (logit inflation) values, F1 scores, and execution times for every combination of simulation parameters
+    - `tables` folder contains refined CSV files from the scores CSV for use in generating results tables
 - `sloe-logistic` folder contains the source code for the SLOE logistic regression estimator from: <https://github.com/google-research/sloe-logistic>
+- `analysis.py` is the script that generates the results tables
 - `run_experiments.py` is the script that runs all the experiments
 
 ```
@@ -35,8 +37,10 @@ This codebase is structured as follows:
 │   |   ├── latent_gaussian
 │   |   ├── latent_non_gaussian
 │   |   └── non_gaussian
+|   ├── tables
 │   └── scores
 ├── sloe-logistic
+├── analysis.py
 └── run_experiments.py
 
 ```
