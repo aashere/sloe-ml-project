@@ -36,7 +36,7 @@ def simulate_gaussian(n, p, gamma):
     beta[:p//8] = 2*gamma/np.sqrt(p)
     beta[p//8:p//4] = -2*gamma/np.sqrt(p)
 
-    proba = torch.sigmoid(torch.matmul(X,beta))
+    proba = torch.sigmoid(-torch.matmul(X,beta))
     y = torch.bernoulli(proba)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True, train_size=0.8, random_state=0)
@@ -71,7 +71,7 @@ def simulate_non_gaussian(n, p, gamma):
     beta[:p//8] = 2*gamma/np.sqrt(p)
     beta[p//8:p//4] = -2*gamma/np.sqrt(p)
 
-    proba = torch.sigmoid(torch.matmul(X_flow,beta))
+    proba = torch.sigmoid(-torch.matmul(X_flow,beta))
     y_flow = torch.bernoulli(proba)
 
     X_train, X_test, y_train, y_test = train_test_split(X_flow, y_flow, shuffle=True, train_size=0.8, random_state=0)
@@ -105,7 +105,7 @@ def simulate_latent_gaussian(n, p, gamma):
     beta[:p//8] = 2*gamma/np.sqrt(p)
     beta[p//8:p//4] = -2*gamma/np.sqrt(p)
 
-    proba = torch.sigmoid(torch.matmul(X,beta))
+    proba = torch.sigmoid(-torch.matmul(X,beta))
     y = torch.bernoulli(proba)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True, train_size=0.8, random_state=0)
@@ -148,14 +148,14 @@ def simulate_latent_non_gaussian(n, p, gamma):
     beta[:p//8] = 2*gamma/np.sqrt(p)
     beta[p//8:p//4] = -2*gamma/np.sqrt(p)
 
-    proba = torch.sigmoid(torch.matmul(X,beta))
+    proba = torch.sigmoid(-torch.matmul(X,beta))
     y = torch.bernoulli(proba)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True, train_size=0.8, random_state=0)
 
     return X_train, X_test, y_train, y_test
 
-def simulate_cauchy(n, p, gamma):
+def simulate_heavy(n, p, gamma):
     x_dist = StudentT(df=3)
     X = x_dist.sample([n,p])
 
@@ -167,7 +167,7 @@ def simulate_cauchy(n, p, gamma):
     beta[:p//8] = 2*gamma/np.sqrt(p)
     beta[p//8:p//4] = -2*gamma/np.sqrt(p)
 
-    proba = torch.sigmoid(torch.matmul(X,beta))
+    proba = torch.sigmoid(-torch.matmul(X,beta))
     y = torch.bernoulli(proba)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True, train_size=0.8, random_state=0)
@@ -184,7 +184,7 @@ def run_test(ratio, n, p, ci, title, type, gamma=np.sqrt(5), X=None, y=None, is_
     elif type == 'latent_non_gaussian':
         func = simulate_latent_non_gaussian
     elif type == 'heavy':
-        func = simulate_cauchy
+        func = simulate_heavy
     
     if type == 'heart':
         X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True, train_size=0.8, random_state=0)
